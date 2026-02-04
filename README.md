@@ -1,155 +1,143 @@
-🧠 Brain Tumor MRI Classification – Deep Learning Project
-📌 Overview
+<h1 align="center"> Brain Tumor MRI Classification</h1>
 
-This project implements a Deep Learning pipeline for automatic brain tumor classification from MRI images.
-It combines a custom Convolutional Neural Network (CNN) and Transfer Learning models to classify brain MRI scans into four categories:
+<p align="center">
+Deep Learning project for automatic brain tumor classification from MRI images.
+</p>
 
-Glioma
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue"/>
+  <img src="https://img.shields.io/badge/TensorFlow-DeepLearning-orange"/>
+  <img src="https://img.shields.io/badge/Status-Completed-green"/>
+  <img src="https://img.shields.io/badge/License-Educational-lightgrey"/>
+</p>
 
-Meningioma
+---
 
-Pituitary Tumor
+<h2>📌 Project Summary</h2>
 
-No Tumor
+<p>
+This project builds an AI system that classifies brain MRI scans into <b>4 categories</b>:
+</p>
 
-The project also explores model interpretability (Grad-CAM) and optional tumor detection using YOLOv8, making it closer to a real medical AI workflow.
+<ul>
+  <li>Glioma</li>
+  <li>Meningioma</li>
+  <li>Pituitary Tumor</li>
+  <li>No Tumor</li>
+</ul>
 
-🎯 Objectives
+<p>
+Includes a <b>Custom CNN baseline</b>, <b>Transfer Learning models</b>,
+<b>Grad-CAM interpretability</b>, and optional <b>YOLOv8 detection</b>.
+</p>
 
-Build a CNN from scratch as a baseline
+---
 
-Apply Transfer Learning (DenseNet121, ResNet50, VGG16, EfficientNetB0)
+<h2>📂 Dataset</h2>
 
-Perform data preprocessing & augmentation
-
-Compare model performances
-
-Improve interpretability with Grad-CAM
-
-Explore tumor localization with YOLOv8
-
-📂 Dataset
-
-Brain Tumor MRI Dataset – Kaggle
+<p>
+<b>Brain Tumor MRI Dataset – Kaggle</b><br/>
+<a href="https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset">
 https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
+</a>
+</p>
 
-Details:
+<ul>
+  <li>~7,000 MRI images</li>
+  <li>4 balanced classes</li>
+  <li>Axial T1 scans</li>
+  <li>Resized to 224×224</li>
+</ul>
 
-~7,000 MRI images
+---
 
-4 classes: Glioma, Meningioma, Pituitary, No Tumor
+<h2>⚙️ Pipeline</h2>
 
-Balanced distribution
+<b>Preprocessing</b>
+<ul>
+  <li>Resize → 224×224</li>
+  <li>Normalize → [0,1]</li>
+  <li>Grayscale → RGB</li>
+  <li>One-Hot Encoding</li>
+</ul>
 
-Axial T1 MRI slices
+<b>Data Augmentation</b>
+<ul>
+  <li>Rotation / Translation</li>
+  <li>Flip</li>
+  <li>Zoom & Shear</li>
+  <li>Brightness & Contrast</li>
+</ul>
 
-Images resized to 224×224
+---
 
-🖼️ Preprocessing
+<h2>🧠 Models</h2>
 
-Resize to 224×224
+<b>Custom CNN</b>
+<ul>
+  <li>4 Conv Blocks + MaxPooling</li>
+  <li>Dense(512) + Dropout</li>
+  <li><b>Accuracy ≈ 95%</b></li>
+</ul>
 
-Normalize pixels to [0,1]
+<b>Transfer Learning</b>
+<ul>
+  <li>DenseNet121</li>
+  <li>ResNet50</li>
+  <li>EfficientNetB0</li>
+  <li>VGG16</li>
+</ul>
 
-Convert grayscale → RGB
+---
 
-One-hot encoding
+<h2>📊 Results</h2>
 
-Train / Validation / Test split
+<table>
+<tr><th>Model</th><th>Accuracy</th></tr>
+<tr><td>CNN</td><td>95.4%</td></tr>
+<tr><td>VGG16</td><td>98.1%</td></tr>
+<tr><td>EfficientNetB0</td><td>98.1%</td></tr>
+<tr><td>ResNet50</td><td>98.8%</td></tr>
+<tr><td><b>DenseNet121</b></td><td><b>98.8%</b></td></tr>
+</table>
 
-🔄 Data Augmentation
+<p>
+<b>Key Notes:</b><br/>
+• Transfer Learning +3% vs CNN<br/>
+• Best Models: DenseNet121 & ResNet50<br/>
+• Main confusion: Glioma vs Meningioma
+</p>
 
-Rotation
+---
 
-Translation
+<h2>🔍 Interpretability</h2>
+<p><b>Grad-CAM heatmaps</b> highlight tumor-relevant regions for transparency.</p>
 
-Horizontal Flip
+---
 
-Zoom & Shear
+<h2>📍 Optional</h2>
+<p><b>YOLOv8</b> used for tumor detection & localization.</p>
 
-Brightness / Contrast variation
+---
 
-🧠 Models
-1. Custom CNN (Baseline)
+<h2>🛠️ Tech Stack</h2>
+<p>
+Python • TensorFlow/Keras • Scikit-learn • NumPy • Matplotlib • YOLOv8 • Google Colab
+</p>
 
-4 Convolutional blocks
+---
 
-ReLU + MaxPooling
+<h2>🚀 Future Work</h2>
+<ul>
+  <li>Vision Transformers</li>
+  <li>Segmentation (U-Net)</li>
+  <li>Model Ensembles</li>
+  <li>Web Deployment</li>
+</ul>
 
-Dense(512) + Dropout
+---
 
-Softmax Output
-
-~496K parameters
-
-Accuracy: ~95%
-
-2. Transfer Learning Models
-
-DenseNet121
-
-ResNet50
-
-EfficientNetB0
-
-VGG16
-
-These models were fine-tuned using ImageNet pretrained weights.
-
-📊 Results
-Model	Accuracy
-Custom CNN	95.4%
-VGG16	98.1%
-EfficientNetB0	98.1%
-ResNet50	98.8%
-DenseNet121	98.8%
-
-Observations
-
-Transfer Learning outperformed the custom CNN by ~3%
-
-DenseNet121 & ResNet50 achieved the best accuracy
-
-Most confusion occurred between Glioma and Meningioma
-
-“No Tumor” class reached near-perfect precision
-
-🔍 Interpretability
-
-Grad-CAM heatmaps were used to visualize which brain regions influenced model predictions, increasing transparency and clinical trust.
-
-📍 Optional – YOLOv8 Detection
-
-YOLOv8 was tested for tumor localization using bounding boxes and mAP/IoU metrics.
-
-🛠️ Tech Stack
-
-Python
-
-TensorFlow / Keras
-
-Scikit-learn
-
-NumPy
-
-Matplotlib / Seaborn
-
-Ultralytics YOLOv8
-
-Google Colab GPU
-
-🚀 Future Work
-
-Vision Transformers (ViT)
-
-Model Ensembles
-
-Tumor Segmentation (U-Net)
-
-External clinical validation
-
-Web / Desktop deployment
-
-⚠️ Disclaimer
-
-This project is for educational and research purposes only and is not a medical diagnostic tool.
+<h2>⚠️ Disclaimer</h2>
+<p>
+Educational & research purposes only — <b>not a medical diagnostic tool</b>.
+</p>
