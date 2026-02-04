@@ -66,7 +66,7 @@ Dataset/
 
 ---
 
-## 🧠 Model Architecture
+# 🧠 Model Architecture
 
 - **4 Convolutional layers**: Filters 32 → 64 → 128 → 128, kernel size 4×4, ReLU activation  
 - **MaxPooling layers** after each convolution (3×3)  
@@ -134,7 +134,7 @@ This project is intended **for educational and research purposes only**.
 It is **not a medical diagnostic tool** and should not be used as a substitute for professional medical advice.
 
 ---
-🧠 DenseNet121 – Classification des Images Médicales (IRM / Radiographies)
+#🧠 DenseNet121 – Classification des Images Médicales (IRM / Radiographies)
 📌 Description
 
 Cette partie du projet implémente un modèle DenseNet121 basé sur le Transfer Learning pour la classification multi-classes d’images médicales.
@@ -147,7 +147,7 @@ une meilleure propagation des gradients,
 une réutilisation efficace des caractéristiques,
 
 une réduction du sur-apprentissage sur des datasets de taille limitée.
-⚙️ Prétraitement des Données
+##⚙️ Prétraitement des Données
 
 Les étapes de prétraitement appliquées sont :
 
@@ -169,7 +169,7 @@ Flip horizontal
 
 Ces techniques améliorent la robustesse et la capacité de généralisation du modèle.
 
-🏗️ Architecture du Modèle
+##🏗️ Architecture du Modèle
 
 Le modèle DenseNet121 est utilisé comme extracteur de caractéristiques, avec des poids pré-entraînés sur ImageNet.
 
@@ -193,7 +193,7 @@ Dense (N_classes) + Softmax
 
 Cette architecture permet un bon compromis entre performance et complexité.
 
-🧪 Entraînement
+##🧪 Entraînement
 
 Fonction de perte : Categorical Crossentropy
 
@@ -205,7 +205,7 @@ Nombre d’époques : 20 (+ fine-tuning optionnel)
 
 Stratégie : Transfer Learning + Fine-tuning partiel
 
-📊 Résultats
+##📊 Résultats
 
 Les performances du modèle sont évaluées à l’aide de :
 
@@ -217,7 +217,7 @@ Precision, Recall, F1-score par classe
 
 DenseNet121 montre une excellente capacité de classification, en particulier pour les classes cliniquement distinctes, avec une bonne stabilité entre entraînement et validation.
 
-📁 Fichiers Importants
+##📁 Fichiers Importants
 
 densenet_train.ipynb : entraînement du modèle
 
@@ -229,7 +229,7 @@ accuracy_loss.png : courbes d’apprentissage
 
 model_densenet121.h5 : modèle entraîné
 
-🚀 Exécution
+##🚀 Exécution
 
 Monter Google Drive
 
@@ -239,7 +239,7 @@ Lancer le notebook d’entraînement
 
 Évaluer le modèle sur le jeu de test
 
-📚 Références
+##📚 Références
 
 Huang et al., Densely Connected Convolutional Networks, CVPR 2017
 
