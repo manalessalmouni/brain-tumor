@@ -134,7 +134,118 @@ This project is intended **for educational and research purposes only**.
 It is **not a medical diagnostic tool** and should not be used as a substitute for professional medical advice.
 
 ---
+🧠 DenseNet121 – Classification des Images Médicales (IRM / Radiographies)
+📌 Description
 
+Cette partie du projet implémente un modèle DenseNet121 basé sur le Transfer Learning pour la classification multi-classes d’images médicales.
+Le modèle est entraîné pour distinguer entre plusieurs catégories cliniques (par exemple : glioma, meningioma, notumor, pituitary), à partir d’images IRM / radiographiques.
+
+DenseNet121 est particulièrement adapté aux applications médicales grâce à :
+
+une meilleure propagation des gradients,
+
+une réutilisation efficace des caractéristiques,
+
+une réduction du sur-apprentissage sur des datasets de taille limitée.
+⚙️ Prétraitement des Données
+
+Les étapes de prétraitement appliquées sont :
+
+Redimensionnement des images à 224 × 224
+
+Normalisation des pixels
+
+Conversion en RGB (3 canaux)
+
+Augmentation de données (training uniquement) :
+
+Rotation (±15°)
+
+Translation (±10%)
+
+Zoom (±10%)
+
+Flip horizontal
+
+Ces techniques améliorent la robustesse et la capacité de généralisation du modèle.
+
+🏗️ Architecture du Modèle
+
+Le modèle DenseNet121 est utilisé comme extracteur de caractéristiques, avec des poids pré-entraînés sur ImageNet.
+
+🔹 Pipeline du modèle :
+
+DenseNet121 (Base gelée)
+
+Global Average Pooling
+
+Dense (512) + ReLU
+
+Batch Normalization + Dropout
+
+Dense (256) + ReLU
+
+Batch Normalization + Dropout
+
+Dense (128) + ReLU
+
+Dense (N_classes) + Softmax
+
+Cette architecture permet un bon compromis entre performance et complexité.
+
+🧪 Entraînement
+
+Fonction de perte : Categorical Crossentropy
+
+Optimiseur : Adam
+
+Batch size : 32
+
+Nombre d’époques : 20 (+ fine-tuning optionnel)
+
+Stratégie : Transfer Learning + Fine-tuning partiel
+
+📊 Résultats
+
+Les performances du modèle sont évaluées à l’aide de :
+
+Courbes Accuracy / Loss (Train & Validation)
+
+Matrice de confusion
+
+Precision, Recall, F1-score par classe
+
+DenseNet121 montre une excellente capacité de classification, en particulier pour les classes cliniquement distinctes, avec une bonne stabilité entre entraînement et validation.
+
+📁 Fichiers Importants
+
+densenet_train.ipynb : entraînement du modèle
+
+densenet_evaluation.ipynb : évaluation et métriques
+
+confusion_matrix.png : matrice de confusion
+
+accuracy_loss.png : courbes d’apprentissage
+
+model_densenet121.h5 : modèle entraîné
+
+🚀 Exécution
+
+Monter Google Drive
+
+Vérifier la structure du dataset
+
+Lancer le notebook d’entraînement
+
+Évaluer le modèle sur le jeu de test
+
+📚 Références
+
+Huang et al., Densely Connected Convolutional Networks, CVPR 2017
+
+ImageNet Dataset
+
+TensorFlow & Keras Documentation
 ## 👩‍🎓 Author
 
 Master’s Degree – Artificial Intelligence  
