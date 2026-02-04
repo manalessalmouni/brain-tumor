@@ -1,0 +1,12 @@
+
+path: /content/drive/MyDrive/learning/yolo/data/BrainTumorYOLO
+
+train: train/images
+val: val/images
+
+nc: 4
+names:
+  - glioma
+  - meningioma
+  - notumor
+  - pituitary
