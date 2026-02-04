@@ -1,252 +1,155 @@
-# 🧠 Brain Tumor Classification using Deep Learning (CNN)
+🧠 Brain Tumor MRI Classification – Deep Learning Project
+📌 Overview
 
-## 📌 Project Overview
+This project implements a Deep Learning pipeline for automatic brain tumor classification from MRI images.
+It combines a custom Convolutional Neural Network (CNN) and Transfer Learning models to classify brain MRI scans into four categories:
 
-This project focuses on the **automatic classification of brain tumors from MRI images** using **Deep Learning** techniques.  
-A **Convolutional Neural Network (CNN) built from scratch** is designed and trained to classify MRI scans into **four categories**:
+Glioma
 
-- **Glioma**
-- **Meningioma**
-- **Pituitary Tumor**
-- **No Tumor**
+Meningioma
 
-The project demonstrates the effectiveness of CNNs in **medical image analysis** and their potential as **decision-support tools** for radiologists.
+Pituitary Tumor
 
----
+No Tumor
 
-## 🎯 Objectives
+The project also explores model interpretability (Grad-CAM) and optional tumor detection using YOLOv8, making it closer to a real medical AI workflow.
 
-- Build a **CNN from scratch** for medical image classification  
-- Apply **data preprocessing and augmentation** techniques  
-- Achieve high classification accuracy on MRI images  
-- Analyze model performance using quantitative and visual metrics  
+🎯 Objectives
 
----
+Build a CNN from scratch as a baseline
 
-## 📂 Dataset
+Apply Transfer Learning (DenseNet121, ResNet50, VGG16, EfficientNetB0)
 
-The dataset used is the **Brain Tumor MRI Dataset**, organized as follows:
+Perform data preprocessing & augmentation
 
-Dataset/
-│
-├── Training/
-│ ├── glioma/
-│ ├── meningioma/
-│ ├── pituitary/
-│ └── notumor/
-│
-└── Testing/
-├── glioma/
-├── meningioma/
-├── pituitary/
-└── notumor/
+Compare model performances
 
-- Images are grayscale or RGB MRI scans
-- Each folder name represents the corresponding class
-- The dataset is relatively balanced across classes
+Improve interpretability with Grad-CAM
 
----
+Explore tumor localization with YOLOv8
 
-## 🖼️ Data Preprocessing
+📂 Dataset
 
-- Image resizing to **150 × 150 pixels**
-- Pixel normalization to the range **[0, 1]**
-- One-hot encoding of class labels
-- Train/validation/test split
+Brain Tumor MRI Dataset – Kaggle
+https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset
 
----
+Details:
 
-## 🔄 Data Augmentation
+~7,000 MRI images
 
-- Random rotations  
-- Width and height shifts  
-- Shear transformations  
-- Zoom operations  
-- Horizontal flipping  
+4 classes: Glioma, Meningioma, Pituitary, No Tumor
 
----
+Balanced distribution
 
-# 🧠 Model Architecture
+Axial T1 MRI slices
 
-- **4 Convolutional layers**: Filters 32 → 64 → 128 → 128, kernel size 4×4, ReLU activation  
-- **MaxPooling layers** after each convolution (3×3)  
-- **Fully connected layers**: Flatten → Dense(512, ReLU) → Dropout(0.5)  
-- **Output layer**: Dense(4, Softmax)  
+Images resized to 224×224
 
----
+🖼️ Preprocessing
 
-## 📉 Loss Function and Optimizer
+Resize to 224×224
 
-- **Loss Function:** Categorical Crossentropy  
-- **Optimizer:** Adam (learning rate 0.001)  
-- **Evaluation Metric:** Accuracy  
+Normalize pixels to [0,1]
 
----
+Convert grayscale → RGB
 
-## ⏱️ Training Strategy
+One-hot encoding
 
-- Batch size: **32**
-- Maximum epochs: **40**
-- Callbacks:
-  - **EarlyStopping** to prevent overfitting
-  - **ReduceLROnPlateau** to adjust learning rate dynamically
+Train / Validation / Test split
 
----
+🔄 Data Augmentation
 
-## 📊 Results
+Rotation
 
-- **Test Accuracy:** ~95%  
-- High precision, recall, and F1-score across all classes  
-- Confusion matrix shows most misclassifications occur between **glioma and meningioma**, which is clinically reasonable.
+Translation
 
----
+Horizontal Flip
 
-## 📈 Evaluation and Visualization
+Zoom & Shear
 
-- Training and validation accuracy/loss curves  
-- Confusion matrix  
-- Sample predictions with true vs predicted labels  
+Brightness / Contrast variation
 
----
+🧠 Models
+1. Custom CNN (Baseline)
 
-## 🛠️ Technologies Used
+4 Convolutional blocks
 
-- Python  
-- TensorFlow / Keras  
-- NumPy  
-- Matplotlib  
-- Scikit-learn  
+ReLU + MaxPooling
 
----
+Dense(512) + Dropout
 
-## 🚀 Future Improvements
+Softmax Output
 
-- Apply **Transfer Learning** (VGG16, ResNet50, EfficientNet)  
-- Add **model interpretability** using Grad-CAM  
-- Train on larger and real clinical datasets  
-- Deploy as a **web or desktop application**  
+~496K parameters
 
----
+Accuracy: ~95%
 
-## ⚠️ Disclaimer
+2. Transfer Learning Models
 
-This project is intended **for educational and research purposes only**.  
-It is **not a medical diagnostic tool** and should not be used as a substitute for professional medical advice.
+DenseNet121
 
----
-#🧠 DenseNet121 – Classification des Images Médicales (IRM / Radiographies)
-📌 Description
+ResNet50
 
-Cette partie du projet implémente un modèle DenseNet121 basé sur le Transfer Learning pour la classification multi-classes d’images médicales.
-Le modèle est entraîné pour distinguer entre plusieurs catégories cliniques (par exemple : glioma, meningioma, notumor, pituitary), à partir d’images IRM / radiographiques.
+EfficientNetB0
 
-DenseNet121 est particulièrement adapté aux applications médicales grâce à :
+VGG16
 
-une meilleure propagation des gradients,
+These models were fine-tuned using ImageNet pretrained weights.
 
-une réutilisation efficace des caractéristiques,
+📊 Results
+Model	Accuracy
+Custom CNN	95.4%
+VGG16	98.1%
+EfficientNetB0	98.1%
+ResNet50	98.8%
+DenseNet121	98.8%
 
-une réduction du sur-apprentissage sur des datasets de taille limitée.
-##⚙️ Prétraitement des Données
+Observations
 
-Les étapes de prétraitement appliquées sont :
+Transfer Learning outperformed the custom CNN by ~3%
 
-Redimensionnement des images à 224 × 224
+DenseNet121 & ResNet50 achieved the best accuracy
 
-Normalisation des pixels
+Most confusion occurred between Glioma and Meningioma
 
-Conversion en RGB (3 canaux)
+“No Tumor” class reached near-perfect precision
 
-Augmentation de données (training uniquement) :
+🔍 Interpretability
 
-Rotation (±15°)
+Grad-CAM heatmaps were used to visualize which brain regions influenced model predictions, increasing transparency and clinical trust.
 
-Translation (±10%)
+📍 Optional – YOLOv8 Detection
 
-Zoom (±10%)
+YOLOv8 was tested for tumor localization using bounding boxes and mAP/IoU metrics.
 
-Flip horizontal
+🛠️ Tech Stack
 
-Ces techniques améliorent la robustesse et la capacité de généralisation du modèle.
+Python
 
-##🏗️ Architecture du Modèle
+TensorFlow / Keras
 
-Le modèle DenseNet121 est utilisé comme extracteur de caractéristiques, avec des poids pré-entraînés sur ImageNet.
+Scikit-learn
 
-🔹 Pipeline du modèle :
+NumPy
 
-DenseNet121 (Base gelée)
+Matplotlib / Seaborn
 
-Global Average Pooling
+Ultralytics YOLOv8
 
-Dense (512) + ReLU
+Google Colab GPU
 
-Batch Normalization + Dropout
+🚀 Future Work
 
-Dense (256) + ReLU
+Vision Transformers (ViT)
 
-Batch Normalization + Dropout
+Model Ensembles
 
-Dense (128) + ReLU
+Tumor Segmentation (U-Net)
 
-Dense (N_classes) + Softmax
+External clinical validation
 
-Cette architecture permet un bon compromis entre performance et complexité.
+Web / Desktop deployment
 
-##🧪 Entraînement
+⚠️ Disclaimer
 
-Fonction de perte : Categorical Crossentropy
-
-Optimiseur : Adam
-
-Batch size : 32
-
-Nombre d’époques : 20 (+ fine-tuning optionnel)
-
-Stratégie : Transfer Learning + Fine-tuning partiel
-
-##📊 Résultats
-
-Les performances du modèle sont évaluées à l’aide de :
-
-Courbes Accuracy / Loss (Train & Validation)
-
-Matrice de confusion
-
-Precision, Recall, F1-score par classe
-
-DenseNet121 montre une excellente capacité de classification, en particulier pour les classes cliniquement distinctes, avec une bonne stabilité entre entraînement et validation.
-
-##📁 Fichiers Importants
-
-densenet_train.ipynb : entraînement du modèle
-
-densenet_evaluation.ipynb : évaluation et métriques
-
-confusion_matrix.png : matrice de confusion
-
-accuracy_loss.png : courbes d’apprentissage
-
-model_densenet121.h5 : modèle entraîné
-
-##🚀 Exécution
-
-Monter Google Drive
-
-Vérifier la structure du dataset
-
-Lancer le notebook d’entraînement
-
-Évaluer le modèle sur le jeu de test
-
-##📚 Références
-
-Huang et al., Densely Connected Convolutional Networks, CVPR 2017
-
-ImageNet Dataset
-
-TensorFlow & Keras Documentation
-## 👩‍🎓 Author
-
-Master’s Degree – Artificial Intelligence  
- Deep Learning Project
+This project is for educational and research purposes only and is not a medical diagnostic tool.
